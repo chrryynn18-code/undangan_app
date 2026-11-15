@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Tamu RSVP</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+        table { width: 100%; border-collapse: collapse; background: #fff; }
+        th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+        th { background: #333; color: #fff; }
+    </style>
+</head>
+<body>
+    <h2>Daftar Konfirmasi Kehadiran Tamu</h2>
+    <table>
+        <tr>
+            <th>Nama</th>
+            <th>Kehadiran</th>
+            <th>Jumlah Tamu</th>
+            <th>Pesan/Ucapan</th>
+        </tr>
+        {% for tamu in daftar_tamu %}
+        <tr>
+            <td>{{ tamu[0] }}</td>
+            <td>{{ tamu[1] }}</td>
+            <td>{{ tamu[2] }}</td>
+            <td>{{ tamu[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
