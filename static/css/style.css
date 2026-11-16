@@ -1,3 +1,6 @@
+/* ========================================== */
+/* 1. VARIABEL & RESET DASAR                  */
+/* ========================================== */
 :root {
     --pink-nude-bg: #f8ece8;
     --pink-nude-card: #e5cfc5;
@@ -11,7 +14,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 body {
@@ -22,18 +25,68 @@ body {
     position: relative;
     box-shadow: 0 0 20px rgba(0,0,0,0.08);
     overflow-x: hidden;
-}
-
-.font-aesthetic {
-    font-family: 'Great Vibes', cursive !important;
-    font-weight: 400;
-    letter-spacing: 1px;
+    letter-spacing: 0.2px;
+    line-height: 1.6;
 }
 
 .hidden {
     display: none !important;
 }
-/* --- COVER SCREEN SECTION --- */
+
+.text-center { 
+    text-align: center; 
+}
+
+/* ========================================== */
+/* 2. TIPOGRAFI & FONT KHUSUS                 */
+/* ========================================== */
+.font-aesthetic {
+    font-family: 'Great Vibes', cursive !important;
+    font-weight: 400 !important;
+    font-size: 3rem;
+    letter-spacing: 1px !important;
+    line-height: 1.2;
+}
+
+h1.font-aesthetic, h3.font-aesthetic {
+    font-family: 'Great Vibes', cursive !important;
+}
+
+h2, h3, .event-date, .quote-text {
+    font-family: 'Playfair Display', serif;
+}
+
+.quote-text {
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.sub-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--pink-nude-dark);
+    margin-bottom: 5px;
+}
+
+/* ========================================== */
+/* 3. COVER SCREEN SECTION                    */
+/* ========================================== */
+#cover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    transition: transform 0.15s cubic-bezier(0.77, 0, 0.175, 1);
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+}
+
 .cover-screen {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -47,9 +100,15 @@ body {
     text-align: center;
     padding-bottom: 50px;
     overflow: hidden;
+    transition: opacity 0.13s ease, visibility 0.13s ease;
 }
 
-/* Background Foto Cover */
+.cover-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
 .cover-bg {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 60%;
@@ -58,7 +117,6 @@ body {
     z-index: 1;
 }
 
-/* Lapisan Warna Gradient (Color Overlay) */
 .color-overlay {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -71,21 +129,6 @@ body {
     z-index: 2;
 }
 
-/* Ornamen Bunga Sudut */
-.flower-top-left, .flower-top-right,
-.flower-bottom-left, .flower-bottom-right {
-    position: absolute;
-    width: 110px;
-    z-index: 3;
-    pointer-events: none;
-    opacity: 0.9;
-}
-.flower-top-left { top: -10px; left: -10px; }
-.flower-top-right { top: -10px; right: -10px; transform: scaleX(-1); }
-.flower-bottom-left { bottom: -10px; left: -10px; transform: scaleY(-1); }
-.flower-bottom-right { bottom: -10px; right: -10px; transform: scale(-1); }
-
-/* Konten Cover */
 .cover-content {
     position: relative;
     z-index: 4;
@@ -93,11 +136,8 @@ body {
     padding: 0 20px;
 }
 
-.sub-title {
-    font-size: 0.8rem;
-    letter-spacing: 3px;
-    color: var(--pink-nude-dark);
-    margin-bottom: 5px;
+.cover-content .font-aesthetic {
+    font-size: 3.5rem;
 }
 
 .guest-box {
@@ -126,147 +166,83 @@ body {
     box-shadow: 0 4px 10px rgba(163, 114, 100, 0.3);
     transition: all 0.3s ease;
 }
+
 .btn-open:hover {
     background-color: var(--pink-nude-dark);
 }
 
-/* --- MAIN CONTENT SECTIONS --- */
+/* ========================================== */
+/* 4. LAYOUT SECTION & ORNAMEN BUNGA          */
+/* ========================================== */
 section {
     padding: 40px 20px;
+    position: relative !important;
+    overflow: hidden !important;
 }
 
-.text-center { text-align: center; }
-
-.card-nude {
-    background-color: var(--pink-nude-card);
-    color: var(--pink-nude-dark);
-    padding: 25px;
-    border-radius: 15px;
-    font-size: 0.9rem;
-    line-height: 1.6;
+/* Ornamen Bunga Sudut */
+.corner-flower-tl {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 90px !important;
+    height: auto !important;
+    z-index: 5 !important;
+    pointer-events: none;
+    opacity: 0.85;
 }
 
-.card-white {
-    background: rgba(255, 255, 255, 0.80); /* Putih dengan transparansi 80% */
-    backdrop-filter: blur(5px);            /* Efek blur pada background di belakang kartu */
-    -webkit-backdrop-filter: blur(5px);
-    padding: 20px;
-    border-radius: 15px;
-    margin-top: 15px;
+.corner-flower-br {
+    position: absolute !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    width: 90px !important;
+    height: auto !important;
+    z-index: 5 !important;
+    pointer-events: none;
+    opacity: 0.85;
 }
 
-.shadow {
-    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+/* Ornamen Rafflesia Sudut Kanan Atas */
+.corner-rafflesia-tr {
+    position: absolute !important;
+    top: -15px !important;
+    right: -15px !important;
+    width: 160px;
+    height: auto;
+    opacity: 0.22;
+    z-index: 1;
+    pointer-events: none;
+    transform: rotate(-15deg);
 }
 
-.avatar-circle img {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid var(--pink-nude-card);
-    margin-bottom: 15px;
+@media (max-width: 480px) {
+    .corner-rafflesia-tr {
+        width: 120px;
+        top: -10px;
+        right: -10px;
+    }
 }
 
-.profile-img img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
-}
-
-.divider {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    color: var(--pink-nude-accent);
-    margin: 20px 0;
-}
-
-.social-icon {
-    display: inline-block;
-    margin-top: 8px;
-    color: var(--pink-nude-dark);
-    text-decoration: none;
-    font-size: 0.85rem;
-}
-
-/* Countdown Grid */
-.timer-grid {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 15px;
-}
-.timer-grid div {
-    background: var(--pink-nude-accent);
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-    min-width: 55px;
-}
-.timer-grid span {
-    display: block;
-    font-size: 1.2rem;
-    font-weight: 600;
-}
-
-/* Bank Card */
-.bank-card {
-    background: var(--white);
-    padding: 20px;
-    border-radius: 12px;
-    margin-top: 15px;
-}
-.bank-name {
-    font-weight: 600;
-    color: var(--pink-nude-dark);
-}
-.rekening {
-    font-size: 1.3rem;
-    letter-spacing: 1px;
-    margin: 5px 0;
-}
-.btn-copy {
-    background: var(--pink-nude-card);
-    color: var(--pink-nude-dark);
-    border: none;
-    padding: 8px 16px;
-    border-radius: 20px;
-    cursor: pointer;
-    margin-top: 8px;
-}
-
-/* Sticky Bottom Nav */
-.bottom-nav {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(163, 114, 100, 0.9);
-    backdrop-filter: blur(8px);
-    display: flex;
-    gap: 25px;
-    padding: 12px 28px;
-    border-radius: 30px;
-    z-index: 100;
-}
-.bottom-nav a {
-    color: white;
-    font-size: 1.1rem;
-    text-decoration: none;
-}
-/* --- Styling Kartu Acara & Tombol Lokasi ala Referensi --- */
+/* ========================================== */
+/* 5. KARTU ACARA (EVENT CARD) - DIPERBAIKI   */
+/* ========================================== */
 .event-card {
     background: var(--white);
     border-radius: 20px;
     padding: 30px 20px;
-    margin-bottom: 40px !important; /* Memaksa jarak bawah antar kotak */
+    margin-bottom: 45px !important; /* Jarak aman antar kotak */
     border: 1px solid rgba(163, 114, 100, 0.12);
-    position: relative !important;   /* Wajib relative agar mengalir normal */
-    width: 100%;
-    box-sizing: border-box;
-    clear: both;                     /* Mencegah bentrok elemen float */
+    position: relative !important;
+    width: 100% !important;
+    max-width: 600px !important;   /* Menjaga agar tidak kurus panjang */
+    margin-left: auto !important;
+    margin-right: auto !important; /* Posisi otomatis di tengah */
+    box-sizing: border-box !important;
+    display: block !important;
+    clear: both !important;
+    float: none !important;
+    color: #333 !important;
 }
 
 .event-date {
@@ -298,7 +274,6 @@ section {
     padding: 0 10px;
 }
 
-/* Tombol Lokasi Bentuk Kapsul Cokelat Nude */
 .btn-location {
     display: inline-flex;
     align-items: center;
@@ -325,19 +300,91 @@ section {
     background-color: var(--pink-nude-card);
     margin: 25px auto;
 }
-/* --- Styling Gallery --- */
-.section-title {
-    font-size: 2.5rem;
+
+/* ========================================== */
+/* 6. KOMPONEN UMUM & KARTU KARTU PENDUKUNG     */
+/* ========================================== */
+.card-nude {
+    background-color: var(--pink-nude-card);
     color: var(--pink-nude-dark);
-    margin-bottom: 5px;
+    padding: 25px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    line-height: 1.6;
 }
 
-.section-subtitle {
-    font-size: 0.85rem;
-    color: #7a635a;
-    margin-bottom: 20px;
+.card-white {
+    background: rgba(255, 255, 255, 0.80);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 15px;
+    color: #333;
 }
 
+.shadow {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+}
+
+.avatar-circle img, 
+.profile-img img, 
+.gallery-item img {
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: cover;
+}
+
+.avatar-circle, .profile-img, .gallery-item {
+    overflow: hidden !important;
+    box-sizing: border-box;
+}
+
+.avatar-circle img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 3px solid var(--pink-nude-card);
+    margin-bottom: 15px;
+}
+
+.profile-img img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.divider {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--pink-nude-accent);
+    margin: 20px 0;
+}
+
+/* Countdown Grid */
+.timer-grid {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.timer-grid div {
+    background: var(--pink-nude-accent);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    min-width: 55px;
+}
+
+.timer-grid span {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* Gallery Grid */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -348,304 +395,12 @@ section {
 .gallery-item img {
     width: 100%;
     height: 180px;
-    object-fit: cover;
     border-radius: 12px;
 }
 
-/* --- Styling Kartu Pesan & Tombol Hapus --- */
-.message-card {
-    background: white;
-    padding: 16px;
-    border-radius: 16px;
-    text-align: left;
-    border: 1px solid rgba(163, 114, 100, 0.1);
-    margin-bottom: 12px;
-}
-
-.msg-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 6px;
-}
-
-.msg-name {
-    font-size: 0.95rem;
-    color: var(--pink-nude-dark);
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.verified-icon {
-    color: #28a745;
-    font-size: 0.85rem;
-}
-
-.msg-actions {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.msg-time {
-    font-size: 0.75rem;
-    color: #888;
-}
-
-/* Tombol Hapus (Ikon Tong Sampah) */
-.btn-delete {
-    background: none;
-    border: none;
-    color: #b5837a;
-    cursor: pointer;
-    font-size: 0.85rem;
-    transition: color 0.2s;
-    padding: 2px 4px;
-}
-
-.btn-delete:hover {
-    color: #dc3545; /* Berubah jadi merah saat disentuh/diarahkan kursor */
-}
-
-.msg-text {
-    font-size: 0.88rem;
-    color: var(--text-dark);
-    line-height: 1.4;
-    word-break: break-word;
-    margin-bottom: 10px;
-}
-
-.msg-footer {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.badge-attendance {
-    font-size: 0.75rem;
-    padding: 3px 10px;
-    border-radius: 12px;
-    font-weight: 500;
-}
-
-.badge-hadir {
-    background-color: #e2f0d9;
-    color: #385723;
-}
-
-.badge-absent {
-    background-color: #fce4d6;
-    color: #c65911;
-}
 /* ========================================== */
-/* STYLING FORM & DAFTAR UCAPAN (GUESTBOOK) */
+/* 7. BANK & AMPLOP DIGITAL                   */
 /* ========================================== */
-
-.guestbook-card {
-    padding: 24px 20px;
-    border-radius: 20px;
-    background: var(--white);
-    margin-bottom: 20px;
-    border: 1px solid rgba(163, 114, 100, 0.12);
-}
-
-.stats-header {
-    margin-bottom: 20px;
-}
-
-.comments-count {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--pink-nude-dark);
-    margin-bottom: 12px;
-}
-
-.stats-boxes {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-}
-
-.stat-box {
-    flex: 1;
-    padding: 12px;
-    border-radius: 12px;
-    text-align: center;
-    font-weight: 600;
-}
-
-.stat-box.green {
-    background-color: #e2f0d9;
-    color: #385723;
-}
-
-.stat-box.red {
-    background-color: #fce4d6;
-    color: #c65911;
-}
-
-.stat-box span {
-    display: block;
-    font-size: 1.3rem;
-}
-
-.stat-box small {
-    font-size: 0.8rem;
-    font-weight: 500;
-}
-
-.form-group {
-    margin-bottom: 14px;
-}
-
-.form-control {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #d9c5bc;
-    border-radius: 12px;
-    background-color: #fcf9f7;
-    font-size: 0.9rem;
-    color: var(--text-dark);
-    outline: none;
-}
-
-.form-control:focus {
-    border-color: var(--pink-nude-accent);
-}
-
-.form-control.select-control {
-    background-color: #fff;
-    cursor: pointer;
-}
-
-.btn-submit {
-    width: 100%;
-    background-color: var(--pink-nude-accent);
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 25px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(163, 114, 100, 0.25);
-    transition: background 0.3s;
-}
-
-.btn-submit:hover {
-    background-color: var(--pink-nude-dark);
-}
-
-/* --- Kartu Pesan & Daftar Komentar --- */
-.message-container {
-    max-height: 450px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 15px;
-    padding-right: 4px;
-}
-
-.message-card {
-    background: white;
-    padding: 16px;
-    border-radius: 16px;
-    text-align: left;
-    border: 1px solid rgba(163, 114, 100, 0.1);
-    margin-bottom: 4px;
-}
-
-.msg-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 6px;
-}
-
-.msg-name {
-    font-size: 0.95rem;
-    color: var(--pink-nude-dark);
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.verified-icon {
-    color: #28a745;
-    font-size: 0.85rem;
-}
-
-.msg-actions {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.msg-time {
-    font-size: 0.75rem;
-    color: #888;
-}
-
-/* Tombol Hapus (Ikon Tong Sampah) */
-.btn-delete {
-    background: none;
-    border: none;
-    color: #b5837a;
-    cursor: pointer;
-    font-size: 0.85rem;
-    transition: color 0.2s;
-    padding: 2px 4px;
-}
-
-.btn-delete:hover {
-    color: #dc3545;
-}
-
-.msg-text {
-    font-size: 0.88rem;
-    color: var(--text-dark);
-    line-height: 1.4;
-    word-break: break-word;
-    margin-bottom: 10px;
-}
-
-.msg-footer {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.badge-attendance {
-    font-size: 0.75rem;
-    padding: 3px 10px;
-    border-radius: 12px;
-    font-weight: 500;
-}
-
-.badge-hadir {
-    background-color: #e2f0d9;
-    color: #385723;
-}
-
-.badge-absent {
-    background-color: #fce4d6;
-    color: #c65911;
-}
-/* --- Styling Amplop Digital & Kartu ATM --- */
-.gift-section {
-    padding: 30px 15px;
-}
-
-.gift-subtitle {
-    font-size: 0.85rem;
-    color: #7a635a;
-    margin-bottom: 25px;
-    line-height: 1.5;
-    padding: 0 10px;
-}
-
 .atm-card {
     background: var(--white);
     border-radius: 18px;
@@ -663,12 +418,6 @@ section {
     margin-bottom: 15px;
 }
 
-.atm-header.justify-center {
-    justify-content: center;
-    gap: 8px;
-}
-
-/* Chip Kartu ATM */
 .atm-chip {
     width: 35px;
     height: 26px;
@@ -687,25 +436,14 @@ section {
     background: rgba(0,0,0,0.2);
 }
 
-/* Logo Bank */
 .bank-logo {
     font-weight: 800;
     font-size: 1.2rem;
     letter-spacing: 0.5px;
 }
 
-.bca-text {
-    color: #0060af;
-    font-style: italic;
-}
-
-.mandiri-text {
-    color: #003366;
-}
-
-.atm-body {
-    margin-bottom: 15px;
-}
+.bca-text { color: #0060af; font-style: italic; }
+.mandiri-text { color: #003366; }
 
 .atm-number {
     font-size: 1.15rem;
@@ -718,16 +456,9 @@ section {
 .atm-name {
     font-size: 0.85rem;
     color: #666;
-    letter-spacing: 0.5px;
     font-weight: 500;
 }
 
-.atm-footer {
-    display: flex;
-    justify-content: flex-end;
-}
-
-/* Tombol Copy */
 .btn-copy {
     background-color: #e5d8d3;
     color: var(--pink-nude-dark);
@@ -748,122 +479,140 @@ section {
     color: white;
 }
 
-/* Styling Khusus Kartu Kirim Hadiah */
-.gift-address-card .gift-top-icon {
-    color: var(--pink-nude-accent);
-    font-size: 1.1rem;
+/* ========================================== */
+/* 8. GUESTBOOK & KOMENTAR                    */
+/* ========================================== */
+.guestbook-card {
+    padding: 24px 20px;
+    border-radius: 20px;
+    background: var(--white);
+    margin-bottom: 20px;
+    border: 1px solid rgba(163, 114, 100, 0.12);
 }
 
-.gift-title {
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--pink-nude-dark);
+.stats-boxes {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 12px;
 }
 
-.gift-details p {
-    font-size: 0.82rem;
+.stat-box {
+    flex: 1;
+    padding: 12px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.stat-box.green { background-color: #e2f0d9; color: #385723; }
+.stat-box.red { background-color: #fce4d6; color: #c65911; }
+
+.stat-box span { display: block; font-size: 1.3rem; }
+.stat-box small { font-size: 0.8rem; font-weight: 500; }
+
+.form-group { margin-bottom: 14px; }
+
+.form-control {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #d9c5bc;
+    border-radius: 12px;
+    background-color: #fcf9f7;
+    font-size: 0.9rem;
     color: var(--text-dark);
-    line-height: 1.4;
+    outline: none;
+}
+
+.form-control:focus { border-color: var(--pink-nude-accent); }
+
+.btn-submit {
+    width: 100%;
+    background-color: var(--pink-nude-accent);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(163, 114, 100, 0.25);
+    transition: background 0.3s;
+}
+
+.btn-submit:hover { background-color: var(--pink-nude-dark); }
+
+.message-container {
+    max-height: 450px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+    padding-right: 4px;
+}
+
+.message-card {
+    background: white;
+    padding: 16px;
+    border-radius: 16px;
+    text-align: left;
+    border: 1px solid rgba(163, 114, 100, 0.1);
+}
+
+.msg-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 6px;
 }
-/* Styling Background Berbeda untuk Setiap Section */
-.hero-section {
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('../images/photo1.jpeg') no-repeat center center/cover;
-    color: white;
-    padding: 80px 20px;
-}
 
-.mempelai-section {
-    background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('../images/photo2.jpeg') no-repeat center center/cover;
-    padding: 60px 20px;
-}
-
-.event-section {
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/photo3.jpeg') no-repeat center center/cover;
-    color: white;
-    padding: 60px 20px;
-}
-
-.gallery-section {
-    background: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.95)), url('../images/photo4.JPG') no-repeat center center/cover;
-    padding: 60px 20px;
-}
-
-.gift-section {
-    background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('../images/photo1.jpeg') no-repeat center center/cover;
-    padding: 60px 20px;
-}
-
-.guestbook-section {
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../images/photo2.jpeg') no-repeat center center/cover;
-    color: white;
-    padding: 60px 20px;
-}
-
-/* Supaya teks dan card di dalam section yang background-nya gelap tetap terbaca jelas */
-.guestbook-section .card-white,
-.event-section .event-card {
-    color: #333; /* Teks di dalam kartu tetap gelap agar kontras */
-}
-
-/* ========================================== */
-/* PENGATURAN FONT BARU & ELEGAN             */
-/* ========================================== */
-
-body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    letter-spacing: 0.2px;
-    line-height: 1.6;
-}
-
-/* Kaligrafi Mewah untuk Nama Mempelai & Judul Section */
-.font-aesthetic {
-    font-family: 'Alex Brush', cursive !important;
-    font-weight: 400;
-    letter-spacing: 1px;
-    line-height: 1.2;
-}
-
-.cover-content .font-aesthetic,
-.hero-section .font-aesthetic {
-    font-size: 3.5rem;
-}
-
-.section-title,
-.event-card h2,
-.countdown-card h3 {
-    font-size: 2.6rem;
-}
-
-.profile-box .font-aesthetic {
-    font-size: 2.3rem;
-}
-
-/* Font Klasik Editorial untuk Sub-judul, Ayat & Tanggal */
-h2, h3, .event-date, .quote-text {
-    font-family: 'Playfair Display', serif;
-}
-
-.quote-text {
-    font-style: italic;
+.msg-name {
     font-size: 0.95rem;
-    line-height: 1.7;
-}
-
-.sub-title {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.75rem;
+    color: var(--pink-nude-dark);
     font-weight: 600;
-    letter-spacing: 3px;
-    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
-.hidden {
-    display: none !important;
+.verified-icon { color: #28a745; font-size: 0.85rem; }
+.msg-time { font-size: 0.75rem; color: #888; }
+
+.btn-delete {
+    background: none;
+    border: none;
+    color: #b5837a;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+    padding: 2px 4px;
 }
+
+.btn-delete:hover { color: #dc3545; }
+
+.msg-text {
+    font-size: 0.88rem;
+    color: var(--text-dark);
+    line-height: 1.4;
+    word-break: break-word;
+    margin-bottom: 10px;
+}
+
+.msg-footer { display: flex; justify-content: flex-end; }
+
+.badge-attendance {
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 500;
+}
+
+.badge-hadir { background-color: #e2f0d9; color: #385723; }
+.badge-absent { background-color: #fce4d6; color: #c65911; }
 
 /* ========================================== */
-/* BACKGROUND FOTO BERBEDA DI SETIAP SECTION   */
+/* 9. BACKGROUND SECTION & OVERLAY UNIFORM    */
 /* ========================================== */
 .hero-section {
     background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('../images/photo1.jpeg') no-repeat center center/cover;
@@ -872,14 +621,37 @@ h2, h3, .event-date, .quote-text {
 }
 
 .mempelai-section {
-    background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('../images/photo2.jpeg') no-repeat center center/cover;
+    background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('../images/BG2.jpg');
+    background-size: cover;
+    background-position: center;
     padding: 60px 20px;
 }
 
 .event-section {
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/photo3.jpeg') no-repeat center center/cover;
-    color: white;
+    position: relative;
+    overflow: hidden;
     padding: 60px 20px;
+}
+
+.event-section .bg-overlay,
+.unified-bg .bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(245, 230, 225, 0.85), rgba(245, 230, 225, 0.85)), 
+                url("../images/BG3.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+.event-section > *:not(.bg-overlay),
+.unified-bg > *:not(.bg-overlay) {
+    position: relative;
+    z-index: 2;
 }
 
 .gallery-section {
@@ -898,332 +670,40 @@ h2, h3, .event-date, .quote-text {
     padding: 60px 20px;
 }
 
-.guestbook-section .card-white,
-.event-section .event-card {
+.guestbook-section .card-white {
     color: #333;
 }
 
-/* Posisi Relatif untuk Section agar sudut bunganya tidak keluar jalur */
-.hero-section,
-.mempelai-section,
-.event-section,
-.gallery-section,
-.gift-section,
-.guestbook-section {
-    position: relative;
-    overflow: hidden;
+/* ========================================== */
+/* 10. ANIMASI & NAVIGASI STICKY               */
+/* ========================================== */
+.bottom-nav {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(163, 114, 100, 0.9);
+    backdrop-filter: blur(8px);
+    display: flex;
+    gap: 25px;
+    padding: 12px 28px;
+    border-radius: 30px;
+    z-index: 100;
 }
 
-/* Hiasan Bunga Sudut Kiri Atas */
-.corner-flower-tl {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 120px; /* Ukuran bisa disesuaikan */
-    pointer-events: none;
-    z-index: 2;
-    opacity: 0.85;
+.bottom-nav a {
+    color: white;
+    font-size: 1.1rem;
+    text-decoration: none;
 }
 
-/* Hiasan Bunga Sudut Kanan Bawah */
-.corner-flower-br {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 120px; /* Ukuran bisa disesuaikan */
-    pointer-events: none;
-    z-index: 2;
-    opacity: 0.85;
-}
-
-/* --- PERBAIKAN ANIMASI & FOTO AOS --- */
 [data-aos] {
     pointer-events: none;
-}
-.aos-animate {
-    pointer-events: auto;
-}
-
-/* Pastikan wadah foto dan kartu mengunci ukurannya dengan benar */
-.avatar-circle, .profile-img, .gallery-item {
-    overflow: hidden !important;
-    box-sizing: border-box;
-}
-
-/* Pastikan gambar di dalam wadah tidak meluber */
-.avatar-circle img, .profile-img img, .gallery-item img {
-    max-width: 100% !important;
-    height: auto !important;
-    object-fit: cover;
-}
-
-/* --- OVERLAY PINK NUDE TRANSPARAN --- */
-.pink-nude-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Kode warna pink nude dengan transparansi 0.55 (bisa diubah dari 0.4 hingga 0.7 sesuai selera) */
-    background-color: rgba(224, 186, 178, 0.55); 
-    z-index: 1;
-}
-
-/* Pastikan konten di dalam cover/section berada di atas lapisan overlay */
-.cover-content, .hero-section > *:not(.cover-bg), .gift-section > *:not(.cover-bg) {
-    position: relative;
-    z-index: 2;
-}
-
-/* --- KELAS KHUSUS BACKGROUND FOTO + PINK NUDE --- */
-.section-with-bg {
-    position: relative;
-    background-size: cover;
-    background-position: center;
-    padding: 80px 20px;
-}
-
-.section-with-bg .pink-nude-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(224, 186, 178, 0.55); /* Warna pink nude transparan */
-    z-index: 1;
-}
-
-/* Memastikan konten di dalam section berada di atas overlay */
-.section-with-bg > *:not(.corner-flower-tl):not(.corner-flower-br):not(.pink-nude-overlay) {
-    position: relative;
-    z-index: 2;
-}
-
-/* --- FIX MUTLAK HERO & GUESTBOOK SECTION (AGAR BUNGA & PINK NUDE RAPI) --- */
-.hero-section, .guestbook-section {
-    position: relative !important;
-    overflow: hidden !important;
-}
-
-/* Kotak Background Foto */
-.hero-section .section-bg-holder, 
-.guestbook-section .section-bg-holder {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    background-size: cover !important;
-    background-position: center !important;
-    z-index: 1 !important;
-}
-
-/* Lapisan Pink Nude Transparan */
-.hero-section .pink-nude-overlay, 
-.guestbook-section .pink-nude-overlay {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    background-color: rgba(224, 186, 178, 0.65) !important; /* Warna pink nude transparan yang jelas */
-    z-index: 2 !important;
-}
-
-/* Memastikan ornamen bunga tetap di atas background tapi di bawah teks */
-.hero-section .corner-flower-tl, .hero-section .corner-flower-br,
-.guestbook-section .corner-flower-tl, .guestbook-section .corner-flower-br {
-    z-index: 4 !important;
-}
-
-/* Memastikan teks/konten berada di lapisan paling atas */
-.hero-section > *:not(.section-bg-holder):not(.pink-nude-overlay):not(.corner-flower-tl):not(.corner-flower-br),
-.guestbook-section > *:not(.section-bg-holder):not(.pink-nude-overlay):not(.corner-flower-tl):not(.corner-flower-br) {
-    position: relative !important;
-    z-index: 3 !important;
-}
-
-/* --- KUNCI MUTLAK POSISI BUNGA SUDUT --- */
-section, .hero-section, .guestbook-section, .quote-section, .mempelai-section, .event-section, .gallery-section, .gift-section {
-    position: relative !important;
-}
-
-.corner-flower-tl {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 90px !important; /* Ukuran bisa disesuaikan jika ingin lebih kecil/besar */
-    height: auto !important;
-    z-index: 5 !important;
-    pointer-events: none;
-}
-
-.corner-flower-br {
-    position: absolute !important;
-    bottom: 0 !important;
-    right: 0 !important;
-    width: 90px !important;
-    height: auto !important;
-    z-index: 5 !important;
-    pointer-events: none;
-}
-
-/* Membuat animasi AOS bisa di-reset dengan halus saat di-scroll berulang */
-[data-aos] {
     transition-property: transform, opacity;
 }
 
-/* Memastikan elemen teks & foto di Hero tampil di atas background/overlay dan siap beranimasi */
-.hero-section .avatar-circle,
-.hero-section .sub-title,
-.hero-section h1 {
-    position: relative !important;
-    z-index: 5 !important;
-}
-
-/* --- ANIMASI KHUSUS HALAMAN HERO (MURNI CSS TANPA AOS) --- */
-@keyframes heroFadeDown {
-    from { opacity: 0; transform: translateY(-40px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes heroFadeRight {
-    from { opacity: 0; transform: translateX(-40px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes heroFadeLeft {
-    from { opacity: 0; transform: translateX(40px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-/* Memasang animasi otomatis saat halaman hero terbuka */
-.hero-active .avatar-circle {
-    animation: heroFadeDown 1s ease forwards !important;
-}
-
-.hero-active .sub-title {
-    animation: heroFadeRight 1s ease 0.3s forwards !important;
-    opacity: 0; /* Mulai dari tak kasat mata */
-}
-
-.hero-active h1.font-aesthetic {
-    animation: heroFadeLeft 1s ease 0.5s forwards !important;
-    opacity: 0; /* Mulai dari tak kasat mata */
-}
-
-/* Pastikan elemen hero selalu terlihat normal dari awal */
-.hero-section .avatar-circle,
-.hero-section .sub-title,
-.hero-section h1 {
-    opacity: 1 !important;
-    visibility: visible !important;
-    position: relative !important;
-    z-index: 5 !important;
-}
-
-/* --- ANIMASI OTOMATIS HALAMAN HERO (MURNI CSS) --- */
-@keyframes heroSlideDown {
-    0% { opacity: 0; transform: translateY(-40px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes heroSlideRight {
-    0% { opacity: 0; transform: translateX(-40px); }
-    100% { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes heroSlideLeft {
-    0% { opacity: 0; transform: translateX(40px); }
-    100% { opacity: 1; transform: translateX(0); }
-}
-
-/* Memasang animasi langsung pada elemen Hero */
-.hero-section .avatar-circle {
-    animation: heroSlideDown 1s ease 0.2s forwards !important;
-}
-
-.hero-section .sub-title {
-    animation: heroSlideRight 1s ease 0.4s forwards !important;
-}
-
-.hero-section h1.font-aesthetic {
-    animation: heroSlideLeft 1s ease 0.6s forwards !important;
-}
-
-.mempelai-section {
-    position: relative;
-    overflow: hidden;
-}
-
-.section-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1; /* Supaya posisinya berada di belakang teks dan foto profil */
-}
-
-/* Memaksa seluruh teks dengan class font-aesthetic berubah menjadi Great Vibes dengan ukuran pas */
-.font-aesthetic {
-    font-family: 'Great Vibes', cursive !important;
-    font-weight: 400 !important;
-    font-size: 3rem; /* Sesuaikan ukurannya jika ingin lebih besar/kecil */
-    letter-spacing: 1px !important;
-}
-
-/* Memaksa elemen h1 yang menggunakan font-aesthetic agar ikut berubah */
-h1.font-aesthetic, h3.font-aesthetic {
-    font-family: 'Great Vibes', cursive !important;
-}
-
-/* Pastikan semua section punya position relative agar bunga tidak keluar batas */
-section {
-    position: relative;
-    overflow: hidden;
-}
-
-/* Ornamen Bunga Rafflesia Sudut Kanan Atas */
-.corner-rafflesia-tr {
-    position: absolute;
-    top: -15px;             /* Jarak dari atas (minus agar sedikit terpotong alami di sudut) */
-    right: -15px;           /* Jarak dari kanan */
-    width: 160px;           /* Ukuran lebar bunga (sesuaikan selera, misal 140px - 200px) */
-    height: auto;
-    opacity: 0.22;          /* Transparansi tipis (0.15 = sangat tipis, 0.30 = agak terlihat) */
-    z-index: 1;             /* Berada di atas background, tapi di bawah teks/kartu */
-    pointer-events: none;   /* Agar tidak menghalangi klik tombol/form di dekatnya */
-    transform: rotate(-15deg); /* Sedikit dimiringkan agar terlihat lebih estetik */
-}
-
-/* Penyesuaian ukuran untuk layar HP agar tidak terlalu besar */
-@media (max-width: 480px) {
-    .corner-rafflesia-tr {
-        width: 120px;
-        top: -10px;
-        right: -10px;
-    }
-}
-
-/* 1. Pastikan setiap section menjadi wadah (relative) dan membatasi elemen di dalamnya (overflow hidden) */
-section {
-    position: relative;
-    overflow: hidden;
-}
-
-/* 2. Pengaturan mutlak untuk ornamen bunga di sudut kanan atas */
-.corner-rafflesia-tr {
-    position: absolute !important;   /* Memaksa posisi absolut terhadap section masing-masing */
-    top: -15px !important;
-    right: -15px !important;
-    width: 160px;
-    height: auto;
-    opacity: 0.22;                   /* Transparansi tipis */
-    z-index: 1;                      /* Di atas background, di bawah konten utama */
-    pointer-events: none;            /* Agar tidak mengganggu klik tombol/form */
-    transform: rotate(-15deg);
+.aos-animate {
+    pointer-events: auto;
 }
 
 [data-aos="wipe-left"] {
@@ -1232,136 +712,25 @@ section {
     transition-property: transform, opacity, clip-path;
     clip-path: inset(0 100% 0 0);
     transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
-    transition-duration: 2s; /* Mengubah durasi bawaan menjadi 2 detik */
+    transition-duration: 2s;
 }
 
-    /* --- Efek Ketik (Typewriter Halus Tanpa Pointer) --- */
-    .smooth-typewriter {
-        overflow: hidden; /* Menyembunyikan teks yang belum muncul */
-        white-space: normal; /* Memungkinkan teks turun ke baris baru secara alami */
-        margin: 0 auto;
-        animation: typingAnimation var(--typing-duration, 4s) steps(var(--typing-steps, 80), end) forwards;
-        animation-play-state: paused; /* Ditahan dulu sampai section terlihat di layar */
-    }
-
-    /* Animasi membuka teks dari kiri ke kanan secara bertahap */
-    @keyframes typingAnimation {
-        from {
-            max-height: 0;
-            opacity: 0;
-            clip-path: inset(0 100% 0 0);
-        }
-        to {
-            max-height: 500px;
-            opacity: 1;
-            clip-path: inset(0 0 0 0);
-        }
-    }
-
-    /* --- PERBAIKAN ANIMASI KETIK (SMOOTH TYPEWRITER) --- */
 .smooth-typewriter {
-    overflow: hidden; /* Menyembunyikan teks yang belum diketik */
-    white-space: normal; /* Membiarkan teks turun ke baris bawah jika panjang */
+    overflow: hidden;
+    white-space: normal;
     margin: 0 auto;
     animation: typing var(--typing-duration, 4s) steps(var(--typing-steps, 100), end) 1 both;
 }
 
-.mempelai-section {
-    background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), 
-                url('../images/BG2.jpg');
-    background-size: cover;
-    background-position: center;
-}
-
-.event-section {
-    position: relative;
-    overflow: hidden;
-}
-
-/* Mengatur background image dan overlay pink nude khusus section ini */
-.event-section .bg-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Ganti bg-acara.jpg dengan nama file foto background Anda di folder static/images/ */
-    background: linear-gradient(rgba(245, 230, 225, 0.85), rgba(245, 230, 225, 0.85)), 
-                url("../images/BG3.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: 1;
-}
-
-/* Memastikan seluruh countdown, kartu acara, dan teks berada di atas overlay */
-.event-section > *:not(.bg-overlay) {
-    position: relative;
-    z-index: 2;
-}
-
-/* Class universal untuk menyamakan background & overlay di semua section */
-.unified-bg {
-    position: relative;
-    overflow: hidden;
-}
-
-.unified-bg .bg-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* WARNA & OPACITY HARUS SAMA PERSIS DI SINI */
-    background: linear-gradient(rgba(245, 230, 225, 0.85), rgba(245, 230, 225, 0.85)), 
-                url("../images/BG4.jpg"); /* Sesuaikan dengan nama file gambar Anda */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: 1;
-}
-
-/* Memastikan konten (teks, kartu, foto) selalu berada di atas overlay */
-.unified-bg > *:not(.bg-overlay) {
-    position: relative;
-    z-index: 2;
-}
-
-#cover {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9999;
-    transition: transform 0.15s cubic-bezier(0.77, 0, 0.175, 1);
-    will-change: transform; /* Memberitahu browser untuk mengoptimalkan animasi ini */
-    transform: translate3d(0, 0, 0); /* Memaksa akselerasi GPU */
-}
-
-    /* ... (CSS wipe-left Anda yang sudah ada) ... */
-
-    /* Tambahan Transisi Smooth untuk Cover */
-    .cover-screen {
-        transition: opacity 0.13s ease, visibility 0.13s ease;
-    }
-    .cover-hidden {
+@keyframes typingAnimation {
+    from {
+        max-height: 0;
         opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
+        clip-path: inset(0 100% 0 0);
     }
-
-/* Solusi pamungkas jarak antar event card */
-div.event-card {
-    margin-bottom: 60px !important;
-    display: block !important;
-    clear: both !important;
-    float: none !important;
-}
-
-/* Mengatasi kotak menyatu secara permanen */
-.event-card {
-    margin-bottom: 45px !important;
-    display: block !important;
-    position: relative !important;
+    to {
+        max-height: 500px;
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+    }
 }
