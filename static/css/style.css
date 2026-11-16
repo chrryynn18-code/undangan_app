@@ -265,11 +265,15 @@ section {
     border: 1px solid rgba(163, 114, 100, 0.12);
 }
 
-.event-card .font-aesthetic {
-    font-size: 2.6rem;
-    color: var(--pink-nude-dark);
-    margin-bottom: 8px;
-    line-height: 1.1;
+.event-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 30px 20px;
+  margin-bottom: 40px; /* Perbesar jarak bawah antar kotak */
+  border: 1px solid rgba(163, 114, 100, 0.12);
+  position: relative;   /* Pastikan posisinya relatif, bukan absolute */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .event-date {
