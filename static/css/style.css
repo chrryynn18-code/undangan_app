@@ -1350,3 +1350,11 @@ section {
         visibility: hidden;
         pointer-events: none;
     }
+
+/* Solusi pamungkas jarak antar event card */
+div.event-card {
+    margin-bottom: 60px !important;
+    display: block !important;
+    clear: both !important;
+    float: none !important;
+}
