@@ -14,8 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const namaTamu = urlParams.get('to');
     
     if (namaTamu) {
-        // Cari elemen tempat nama tamu ditampilkan (bisa disesuaikan id-nya jika berbeda)
-        const guestElement = document.getElementById('nama-tamu') || document.getElementById('guest-name-display');
+        const guestElement = document.getElementById('guest-name-display');
         if (guestElement) {
             guestElement.innerText = namaTamu;
         }
@@ -28,7 +27,7 @@ function typeWriter(elementId, text, speed, callback) {
     const element = document.getElementById(elementId);
     if (!element) return;
     
-    element.innerHTML = ""; // Bersihkan teks awal
+    element.innerHTML = "";
 
     function typing() {
         if (i < text.length) {
@@ -59,7 +58,7 @@ function setupQuoteScrollAnimation() {
 
     const observerOptions = {
         root: null,
-        threshold: 0.3 // Berjalan saat 30% bagian section terlihat di layar
+        threshold: 0.3
     };
 
     const quoteObserver = new IntersectionObserver((entries) => {
@@ -111,30 +110,27 @@ function openInvitation() {
     const mainContent = document.getElementById('main-content');
     const bgMusic = document.getElementById('bg-music');
 
-    // Munculkan konten utama di balik cover terlebih dahulu
-    mainContent.classList.remove('hidden');
+    if (mainContent) mainContent.classList.remove('hidden');
     
-    // Putar musik latar
     if (bgMusic) {
         bgMusic.play().catch(error => {
             console.log("Autoplay dicegah oleh browser:", error);
         });
     }
 
-    // Jalankan transisi geser cover dengan mulus menggunakan requestAnimationFrame
     requestAnimationFrame(() => {
-        cover.style.transform = 'translateY(-100vh)';
-        cover.style.transition = 'transform 0.6s cubic-bezier(0.77, 0, 0.175, 1)';
+        if (cover) {
+            cover.style.transform = 'translateY(-100vh)';
+            cover.style.transition = 'transform 0.6s cubic-bezier(0.77, 0, 0.175, 1)';
+        }
     });
     
-    // Trigger animasi mengetik nama pasangan
     setTimeout(() => {
         typeWriter('typing-name', 'Cheppy & Febby', 80);
     }, 300);
 
-    // Sembunyikan cover dari DOM dan refresh AOS setelah transisi selesai
     setTimeout(() => {
-        cover.style.display = 'none';
+        if (cover) cover.style.display = 'none';
         AOS.refresh();
     }, 600);
 }
@@ -203,10 +199,12 @@ function copyToClipboard(text) {
 function submitMessage(event) {
     event.preventDefault();
 
-    const nameInput = document.getElementById('guest-name');
+    const nameInput = document.getElementById('input-nama-pengirim');
     const msgInput = document.getElementById('guest-msg');
     const attendanceInput = document.getElementById('guest-attendance');
     const messageList = document.getElementById('message-list');
+
+    if (!nameInput || !msgInput || !attendanceInput || !messageList) return;
 
     const name = nameInput.value.trim();
     const message = msgInput.value.trim();
@@ -214,7 +212,6 @@ function submitMessage(event) {
 
     if (!name || !message || !attendance) return;
 
-    // Hapus teks "Belum ada ucapan..." jika itu elemen pertama
     const noMsgEl = messageList.querySelector('.no-message');
     if (noMsgEl) {
         noMsgEl.remove();
