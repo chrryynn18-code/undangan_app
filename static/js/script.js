@@ -93,7 +93,7 @@ function setupQuoteScrollAnimation() {
     quoteObserver.observe(quoteSection);
 }
 
-// 3. Fungsi Membuka Undangan & Memicu Animasi Masuk (Dioptimalkan agar Mulus)
+// 3. Fungsi Membuka Undangan & Memicu Animasi Masuk
 function openInvitation() {
     const cover = document.getElementById('cover');
     const mainContent = document.getElementById('main-content');
@@ -201,6 +201,12 @@ function submitMessage(event) {
     const attendance = attendanceInput.value;
 
     if (!name || !message || !attendance) return;
+
+    // Hapus teks "Belum ada ucapan..." jika itu elemen pertama
+    const noMsgEl = messageList.querySelector('.no-message');
+    if (noMsgEl) {
+        noMsgEl.remove();
+    }
 
     const timeString = new Date().toLocaleDateString('id-ID', { hour: '2-digit', minute: '2-digit' });
     const newMessageCard = document.createElement('div');
