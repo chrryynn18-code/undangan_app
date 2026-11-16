@@ -8,6 +8,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Inisialisasi Observer untuk Animasi Quote Berulang saat Scroll
     setupQuoteScrollAnimation();
+
+    // Otomatis isi nama tamu dari URL (Parameter ?to=...)
+    const urlParams = new URLSearchParams(window.location.search);
+    const namaTamu = urlParams.get('to');
+    
+    if (namaTamu) {
+        // Cari elemen tempat nama tamu ditampilkan (bisa disesuaikan id-nya jika berbeda)
+        const guestElement = document.getElementById('nama-tamu') || document.getElementById('guest-name-display');
+        if (guestElement) {
+            guestElement.innerText = namaTamu;
+        }
+    }
 });
 
 // 2. Fungsi Efek Mengetik Teks (Typewriter Effect yang Mulus)
