@@ -1358,3 +1358,10 @@ div.event-card {
     clear: both !important;
     float: none !important;
 }
+
+/* Mengatasi kotak menyatu secara permanen */
+.event-card {
+    margin-bottom: 45px !important;
+    display: block !important;
+    position: relative !important;
+}
